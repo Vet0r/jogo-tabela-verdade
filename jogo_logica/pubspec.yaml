@@ -40,6 +40,7 @@ dependencies:
   firebase_core: ^2.24.2
   cloud_firestore: ^4.14.0
   flutter_svg: ^2.0.10+1
+  percent_indicator: ^4.2.3
 
 dev_dependencies:
   flutter_test:
@@ -69,6 +70,8 @@ flutter:
    - assets/icons/cristal.png
    - assets/icons/diamante.png
    - assets/icons/gema.png
+   - assets/icons/relogio.png
+   - assets/icons/estrela.png
 
 
   

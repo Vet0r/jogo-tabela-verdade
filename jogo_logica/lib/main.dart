@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:jogo_logica/custom_theme.dart';
 import 'package:jogo_logica/dificuldades.dart';
 import 'package:jogo_logica/jogo.dart';
+import 'package:percent_indicator/linear_percent_indicator.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -41,9 +42,9 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       backgroundColor: backgroundColor,
       appBar: AppBar(
-        backgroundColor: backgroundColor,
+        backgroundColor: Colors.transparent,
         automaticallyImplyLeading: false,
-        title: Text('Jerry'),
+        title: Text('Jerry', style: TextStyle(color: Colors.white),),
       ),
       body: Center(
         child: Column(
@@ -64,7 +65,7 @@ class _MyHomePageState extends State<MyHomePage> {
       color: borda,
       width: 1.0,
     ),
-    borderRadius: BorderRadius.circular(8.0), // Raio dos cantos da borda
+    borderRadius: BorderRadius.circular(8.0), 
   ),
   child: TextButton(
     onPressed: () {
@@ -82,11 +83,11 @@ class _MyHomePageState extends State<MyHomePage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Image.asset(
-            'assets/icons/gema.png', // Caminho para a imagem
+            'assets/icons/gema.png', 
             width: MediaQuery.of(context).size.width * 0.12,
             height: MediaQuery.of(context).size.height * 0.08,
           ),
-          SizedBox(width: 20.0),
+          Padding(padding: EdgeInsets.only(left: 25)),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -96,49 +97,31 @@ class _MyHomePageState extends State<MyHomePage> {
                     'Complete o Nível Fácil',
                     style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w500),
                   ),
-                  Padding(padding: EdgeInsets.only(left: 70)),
+                  Padding(padding: EdgeInsets.only(left: 45)),
                   Icon(Icons.arrow_forward_ios, color: Colors.white),
                 ],
               ),
-              SizedBox(height: 10.0), // Espaço entre o texto e a barra de progresso
-              Container(
-                width: MediaQuery.of(context).size.width * 0.67, // Largura da barra de progresso
-                height: 25.0,
-                decoration: BoxDecoration(
-                  color: Colors.grey[700], // Cor de fundo da barra
-                  borderRadius: BorderRadius.circular(18.0),
-                ),
-                child: Stack(
-                  children: [
-                    FractionallySizedBox(
-                      alignment: Alignment.centerLeft,
-                      widthFactor: 1.0, // Proporção do progresso (0.0 a 1.0)
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: fontPrincipal, // Cor da parte preenchida da barra
-                          borderRadius: BorderRadius.circular(18.0),
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        '10/10', // Texto dentro da barra de progresso
-                        style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600),
-                      ),
-                    ),
-                  ],
-                ),
+              SizedBox(height: 10.0),
+             LinearPercentIndicator(
+                width: MediaQuery.of(context).size.width *0.62,
+                animation: true,
+                lineHeight: 25.0,
+                animationDuration: 2500,
+                percent: 1,
+                center: Text("10/10", style: TextStyle(color: Colors.white,fontSize: 18, fontWeight: FontWeight.w500),),
+                linearStrokeCap: LinearStrokeCap.roundAll,
+                progressColor:fontPrincipal ,
+                backgroundColor: embaixoBorda,
+                barRadius: Radius.circular(14),
               ),
+           
             ],
           ),
-          Spacer(),
-          
         ],
       ),
     ),
   ),
 ),
-
             Container(
   padding: const EdgeInsets.all(8.0),
   decoration: BoxDecoration(
@@ -146,7 +129,7 @@ class _MyHomePageState extends State<MyHomePage> {
       color: borda,
       width: 1.0,
     ),
-    borderRadius: BorderRadius.circular(8.0), // Raio dos cantos da borda
+    borderRadius: BorderRadius.circular(8.0), 
   ),
   child: TextButton(
     onPressed: () {
@@ -164,11 +147,11 @@ class _MyHomePageState extends State<MyHomePage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Image.asset(
-            'assets/icons/cristal.png', // Caminho para a imagem
+            'assets/icons/cristal.png', 
             width: MediaQuery.of(context).size.width * 0.12,
             height: MediaQuery.of(context).size.height * 0.08,
           ),
-          SizedBox(width: 20.0),
+         Padding(padding: EdgeInsets.only(left: 25)),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -178,57 +161,38 @@ class _MyHomePageState extends State<MyHomePage> {
                     'Complete o Nível Médio',
                     style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w500),
                   ),
-                  Padding(padding: EdgeInsets.only(left: 70)),
+                  Padding(padding: EdgeInsets.only(left: 35)),
                   Icon(Icons.arrow_forward_ios, color: Colors.white),
                 ],
               ),
-              SizedBox(height: 10.0), // Espaço entre o texto e a barra de progresso
-              Container(
-                width: MediaQuery.of(context).size.width * 0.67, // Largura da barra de progresso
-                height: 25.0,
-                decoration: BoxDecoration(
-                  color: Colors.grey[700], // Cor de fundo da barra
-                  borderRadius: BorderRadius.circular(18.0),
-                ),
-                child: Stack(
-                  children: [
-                    FractionallySizedBox(
-                      alignment: Alignment.centerLeft,
-                      widthFactor: 1.0, // Proporção do progresso (0.0 a 1.0)
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: fontPrincipal, // Cor da parte preenchida da barra
-                          borderRadius: BorderRadius.circular(18.0),
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        '10/10', // Texto dentro da barra de progresso
-                        style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600),
-                      ),
-                    ),
-                  ],
-                ),
+              SizedBox(height: 10.0), 
+               LinearPercentIndicator(
+                width: MediaQuery.of(context).size.width *0.62,
+                animation: true,
+                lineHeight: 25.0,
+                animationDuration: 2500,
+                percent: 0.4,
+                center: Text("4/10", style: TextStyle(color: Colors.white,fontSize: 18, fontWeight: FontWeight.w500),),
+                linearStrokeCap: LinearStrokeCap.roundAll,
+                progressColor:fontPrincipal ,
+                backgroundColor: embaixoBorda,
+                barRadius: Radius.circular(14),
               ),
             ],
           ),
-          Spacer(),
-          
         ],
       ),
     ),
   ),
 ),
-            
-          Container(
+Container(
   padding: const EdgeInsets.all(8.0),
   decoration: BoxDecoration(
     border: Border.all(
       color: borda,
       width: 1.0,
     ),
-    borderRadius: BorderRadius.circular(8.0), // Raio dos cantos da borda
+    borderRadius: BorderRadius.circular(8.0), 
   ),
   child: TextButton(
     onPressed: () {
@@ -246,11 +210,11 @@ class _MyHomePageState extends State<MyHomePage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Image.asset(
-            'assets/icons/diamante.png', // Caminho para a imagem
+            'assets/icons/diamante.png', 
             width: MediaQuery.of(context).size.width * 0.12,
             height: MediaQuery.of(context).size.height * 0.08,
           ),
-          SizedBox(width: 20.0),
+          Padding(padding: EdgeInsets.only(left: 25)),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -260,43 +224,26 @@ class _MyHomePageState extends State<MyHomePage> {
                     'Complete o Nível Difícil',
                     style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w500),
                   ),
-                  Padding(padding: EdgeInsets.only(left: 70)),
+                  Padding(padding: EdgeInsets.only(left: 35)),
                   Icon(Icons.arrow_forward_ios, color: Colors.white),
                 ],
               ),
               SizedBox(height: 10.0), // Espaço entre o texto e a barra de progresso
-              Container(
-                width: MediaQuery.of(context).size.width * 0.67, // Largura da barra de progresso
-                height: 25.0,
-                decoration: BoxDecoration(
-                  color: Colors.grey[700], // Cor de fundo da barra
-                  borderRadius: BorderRadius.circular(18.0),
-                ),
-                child: Stack(
-                  children: [
-                    FractionallySizedBox(
-                      alignment: Alignment.centerLeft,
-                      widthFactor: 1.0, // Proporção do progresso (0.0 a 1.0)
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: fontPrincipal, // Cor da parte preenchida da barra
-                          borderRadius: BorderRadius.circular(18.0),
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        '10/10', // Texto dentro da barra de progresso
-                        style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600),
-                      ),
-                    ),
-                  ],
-                ),
+             
+              LinearPercentIndicator(
+                width: MediaQuery.of(context).size.width *0.62,
+                animation: true,
+                lineHeight: 25.0,
+                animationDuration: 2500,
+                percent: 0.0,
+                center: Text("0/10", style: TextStyle(color: Colors.white,fontSize: 18, fontWeight: FontWeight.w500),),
+                linearStrokeCap: LinearStrokeCap.roundAll,
+                progressColor:fontPrincipal ,
+                backgroundColor: embaixoBorda,
+                barRadius: Radius.circular(14),
               ),
             ],
           ),
-          Spacer(),
-          
         ],
       ),
     ),
