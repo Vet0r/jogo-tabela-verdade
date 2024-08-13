@@ -6,7 +6,7 @@ class Questao {
 }
 
 List<Questao> facil = [
-  Questao("Verdadeiro ∧ Verdadeiro", true),
+  Questao("Verdadeiro ∧ Verdadeiro ", true),
   Questao("Verdadeiro ∧ Falso", false),
   Questao("Falso ∧ Verdadeiro", false),
   Questao("Falso ∧ Falso", false),
