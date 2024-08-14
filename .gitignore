@@ -25,3 +25,5 @@ doc/api/
 
 .flutter-plugins
 .flutter-plugins-dependencies
+
+/jogo_logica/lib/firebase_options.dart
