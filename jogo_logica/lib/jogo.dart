@@ -2,15 +2,13 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/widgets.dart';
 import 'package:jogo_logica/custom_theme.dart';
 import 'package:jogo_logica/pontuacao.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
 import 'dificuldades.dart';
 
+// ignore: must_be_immutable
 class Jogar extends StatefulWidget {
   Jogar({super.key, required this.dificuldade, required this.modDif});
   List<Questao> dificuldade = [];

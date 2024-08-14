@@ -1,9 +1,4 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:jogo_logica/custom_theme.dart';
 import 'package:jogo_logica/provider/shared_prefs_provider.dart';
@@ -11,6 +6,7 @@ import 'package:provider/provider.dart';
 
 import 'main.dart';
 
+// ignore: must_be_immutable
 class PontuacaoScreen extends StatelessWidget {
   PontuacaoScreen(
       {super.key,
