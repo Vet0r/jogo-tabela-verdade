@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.jogo_logica">
+    package="com.vetorapps.jerry">
    <application
-        android:label="jogo_logica"
+        android:label="Jerry"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

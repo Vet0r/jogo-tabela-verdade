@@ -143,12 +143,15 @@ class _MyHomePageState extends State<MyHomePage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          'Complete o Nível $difuculdade',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w500),
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.56,
+                          child: Text(
+                            'Complete o Nível $difuculdade',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18,
+                                fontWeight: FontWeight.w500),
+                          ),
                         ),
                         Icon(Icons.arrow_forward_ios, color: Colors.white),
                       ],

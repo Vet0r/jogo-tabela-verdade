@@ -1,4 +1,4 @@
-package com.example.jogo_logica
+package com.vetorapps.jerry
 
 import io.flutter.embedding.android.FlutterActivity
 

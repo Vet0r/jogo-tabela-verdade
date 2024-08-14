@@ -1,6 +1,6 @@
-# jogo_logica
+# Jerry
 
-A new Flutter project.
+Projeto flutter para disciplina de matemática discreta
 
 ## Getting Started
 

@@ -38,63 +38,79 @@ class PontuacaoScreen extends StatelessWidget {
     } else {
       imagesAndPhase = 0;
     }
-    return Scaffold(
-      backgroundColor: backgroundColor,
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.only(left: 20.0, right: 20, top: 25),
-          child: SizedBox(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                pageTop(context, images[imagesAndPhase],
-                    phasesBottom[imagesAndPhase], phasesTop[imagesAndPhase]),
-                Padding(
-                  padding: EdgeInsets.only(top: 30),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    square(context, corAmarelo, 'Total XP',
-                        'assets/icons/relogio.svg', '$pontuacao'),
-                    square(context, corAzul, 'Tempo', 'assets/icons/raio.svg',
-                        '0:15'),
-                    square(
+    double media = ((pontuacao / respondidas) * 100);
+    return PopScope(
+      canPop: false,
+      child: Scaffold(
+        backgroundColor: backgroundColor,
+        body: Center(
+          child: Padding(
+            padding: const EdgeInsets.only(left: 20.0, right: 20, top: 25),
+            child: SizedBox(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  pageTop(context, images[imagesAndPhase],
+                      phasesBottom[imagesAndPhase], phasesTop[imagesAndPhase]),
+                  Padding(
+                    padding: EdgeInsets.only(top: 30),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      square(
+                        context,
+                        corAmarelo,
+                        'Total XP',
+                        'assets/icons/relogio.svg',
+                        '$pontuacao',
+                      ),
+                      square(
+                        context,
+                        corAzul,
+                        'Tempo',
+                        'assets/icons/raio.svg',
+                        '0:15',
+                      ),
+                      square(
                         context,
                         corVerde,
                         'Precisão',
                         'assets/icons/alvo.svg',
-                        '${(((pontuacao / respondidas) * 100)).round()}'),
-                  ],
-                ),
-                Padding(
-                  padding: EdgeInsets.only(top: 30),
-                ),
-                ElevatedButton(
-                  style: ButtonStyle(
-                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(6)),
-                          side: BorderSide(color: CorDoBotao, width: 1.0),
+                        '${media.toStringAsFixed(0) == 'NaN' ? 0 : media.toStringAsFixed(0)}%',
+                      ),
+                    ],
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(top: 30),
+                  ),
+                  ElevatedButton(
+                    style: ButtonStyle(
+                        shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(6)),
+                            side: BorderSide(color: CorDoBotao, width: 1.0),
+                          ),
                         ),
+                        backgroundColor:
+                            MaterialStateProperty.all<Color>(backgroundColor2)),
+                    onPressed: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const MyHomePage(),
+                        ),
+                      );
+                    },
+                    child: Center(
+                      child: Text(
+                        "Voltar para o início",
+                        style: TextStyle(color: CorDoBotao),
                       ),
-                      backgroundColor:
-                          MaterialStateProperty.all<Color>(backgroundColor2)),
-                  onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => const MyHomePage(),
-                      ),
-                    );
-                  },
-                  child: Center(
-                    child: Text(
-                      "Voltar para o início",
-                      style: TextStyle(color: CorDoBotao),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

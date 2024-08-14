@@ -1,5 +1,5 @@
 name: jogo_logica
-description: A new Flutter project.
+description: Jogo de lógica para disciplina de MAtemática discreta.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -41,6 +41,11 @@ dependencies:
   cloud_firestore: ^4.14.0
   flutter_svg: ^2.0.10+1
   percent_indicator: ^4.2.3
+  flutter_launcher_icons: ^0.13.1
+
+flutter_launcher_icons:
+  android: true
+  image_path: "assets/app_icon.png"
 
 dev_dependencies:
   flutter_test:
@@ -82,7 +87,7 @@ flutter:
    - assets/icons/raio.svg
    - assets/icons/relogio.svg
    - assets/icons/alvo.svg
-
+   - assets/app_icon.png
   
     # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
