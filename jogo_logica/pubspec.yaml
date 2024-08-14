@@ -79,6 +79,9 @@ flutter:
    - assets/coroa.png
    - assets/viking.png
    - assets/icons/bow.png
+   - assets/icons/raio.svg
+   - assets/icons/relogio.svg
+   - assets/icons/alvo.svg
 
   
     # An image asset can refer to one or more resolution-specific "variants", see

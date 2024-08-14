@@ -34,7 +34,8 @@ class _JogarState extends State<Jogar> {
   int numero = Random().nextInt(10);
   bool? resp;
   int pontuacao = 0;
-  int _start = 1;
+  int respondidas = 0;
+  int _start = 15;
   late Timer _timer;
   @override
   Widget build(BuildContext context) {
@@ -277,7 +278,14 @@ class _JogarState extends State<Jogar> {
     } else {
       if (resp == widget.dificuldade[numero].resposta) {
         pontuacao++;
+      } else {
+        if (pontuacao-- < 0) {
+          null;
+        } else {
+          pontuacao--;
+        }
       }
+      respondidas++;
       setState(() {
         numero = Random().nextInt(10);
         isButtonTrue1Active = false;
@@ -297,6 +305,7 @@ class _JogarState extends State<Jogar> {
           MaterialPageRoute(
             builder: (context) => PontuacaoScreen(
               pontuacao: pontuacao,
+              respondidas: respondidas,
             ),
           ),
         );
