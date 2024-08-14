@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -18,6 +20,7 @@ class PontuacaoScreen extends StatelessWidget {
   int respondidas = 0;
   int modDif = 1;
   int pontuacao = 0;
+
   TextEditingController controller = TextEditingController();
   List<String> phasesBottom = [
     "Continue praticando para melhorar ainda mais!",
@@ -49,15 +52,50 @@ class PontuacaoScreen extends StatelessWidget {
           .sharedPrefs!
           .setInt('pontos', pontuacao + pontosAtuais);
     }
+    var sharedPrefs =
+        Provider.of<SnapshotSharedPreferences>(context, listen: false)
+            .sharedPrefs;
+    switch (modDif) {
+      case 1:
+        int pontos = sharedPrefs!.getInt('nFac') ?? 0;
+        if (pontos <= 10) {
+          sharedPrefs.setInt('nFac', pontos += 1);
+        } else {
+          null;
+        }
+        break;
+      case 3:
+        int pontos = sharedPrefs!.getInt('nMed') ?? 0;
+        if (pontos <= 10) {
+          sharedPrefs.setInt('nMed', pontos += 1);
+        } else {
+          null;
+        }
+        break;
+      case 5:
+        int pontos = sharedPrefs!.getInt('nDif') ?? 0;
+        if (pontos <= 10) {
+          sharedPrefs.setInt('nDif', pontos += 1);
+          ;
+        } else {
+          null;
+        }
+        break;
+      default:
+    }
     double media = (((pontuacao / modDif) / respondidas) * 100);
     int imagesAndPhase = 0;
-    if (media >= 100) {
+    if (media >= 100 && (pontuacao / modDif) >= 10) {
       imagesAndPhase = 2;
     } else if (media > 50 && media < 100) {
       imagesAndPhase = 1;
     } else {
       imagesAndPhase = 0;
     }
+    int sec = (pontuacao + 15) % 60;
+    int min = ((pontuacao + 15) / 60).floor();
+    String minute = min.toString().length <= 1 ? "0$min" : "$min";
+    String second = sec.toString().length <= 1 ? "0$sec" : "$sec";
     return PopScope(
       canPop: false,
       child: Scaffold(
@@ -89,7 +127,7 @@ class PontuacaoScreen extends StatelessWidget {
                         corAzul,
                         'Tempo',
                         'assets/icons/relogio.svg',
-                        '0:15',
+                        '$minute:$second',
                       ),
                       square(
                         context,

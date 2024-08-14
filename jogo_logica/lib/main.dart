@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:jogo_logica/custom_theme.dart';
@@ -56,9 +57,10 @@ class _MyHomePageState extends State<MyHomePage> {
             child: CircularProgressIndicator(),
           );
         } else {
-          final changeSp =
-              Provider.of<SnapshotSharedPreferences>(context, listen: true);
+          var changeSp =
+              Provider.of<SnapshotSharedPreferences>(context, listen: false);
           changeSp.changeSP(snapshot.data!);
+
           return Scaffold(
             backgroundColor: backgroundColor,
             appBar: AppBar(
@@ -74,18 +76,9 @@ class _MyHomePageState extends State<MyHomePage> {
                       SvgPicture.asset('assets/icons/raio.svg'),
                       Padding(padding: EdgeInsets.only(left: 8)),
                       Text(
-                        Provider.of<SnapshotSharedPreferences>(context,
-                                        listen: false)
-                                    .sharedPrefs!
-                                    .getInt('pontos')
-                                    .toString() ==
-                                'null'
+                        snapshot.data!.getInt('pontos').toString() == 'null'
                             ? '0'
-                            : Provider.of<SnapshotSharedPreferences>(context,
-                                    listen: false)
-                                .sharedPrefs!
-                                .getInt('pontos')
-                                .toString(),
+                            : snapshot.data!.getInt('pontos').toString(),
                         style: TextStyle(
                           color: corAmarelo,
                           fontSize: 16,
@@ -124,12 +117,16 @@ class _MyHomePageState extends State<MyHomePage> {
                               fontFamily: 'Quicksand')),
                     ],
                   ),
+                  containerDificuldade('assets/icons/gema.png',
+                      snapshot.data!.getInt('nFac') ?? 0, "Fácil", facil, 1),
+                  containerDificuldade('assets/icons/cristal.png',
+                      snapshot.data!.getInt('nMed') ?? 0, "Médio", medio, 3),
                   containerDificuldade(
-                      'assets/icons/gema.png', 10, "Fácil", facil, 1),
-                  containerDificuldade(
-                      'assets/icons/cristal.png', 4, "Médio", medio, 3),
-                  containerDificuldade(
-                      'assets/icons/diamante.png', 10, "Difícil", dificil, 5),
+                      'assets/icons/diamante.png',
+                      snapshot.data!.getInt('nDif') ?? 0,
+                      "Difícil",
+                      dificil,
+                      5),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
