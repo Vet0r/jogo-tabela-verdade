@@ -4,6 +4,8 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:jogo_logica/custom_theme.dart';
+import 'package:jogo_logica/provider/shared_prefs_provider.dart';
+import 'package:provider/provider.dart';
 
 import 'main.dart';
 
@@ -34,6 +36,19 @@ class PontuacaoScreen extends StatelessWidget {
   ];
   @override
   Widget build(BuildContext context) {
+    int? pontosAtuais =
+        Provider.of<SnapshotSharedPreferences>(context, listen: false)
+            .sharedPrefs!
+            .getInt('pontos');
+    if (pontosAtuais == null) {
+      Provider.of<SnapshotSharedPreferences>(context, listen: false)
+          .sharedPrefs!
+          .setInt('pontos', pontuacao);
+    } else {
+      Provider.of<SnapshotSharedPreferences>(context, listen: false)
+          .sharedPrefs!
+          .setInt('pontos', pontuacao + pontosAtuais);
+    }
     double media = (((pontuacao / modDif) / respondidas) * 100);
     int imagesAndPhase = 0;
     if (media >= 100) {
@@ -66,14 +81,14 @@ class PontuacaoScreen extends StatelessWidget {
                         context,
                         corAmarelo,
                         'Total XP',
-                        'assets/icons/relogio.svg',
+                        'assets/icons/raio.svg',
                         '$pontuacao',
                       ),
                       square(
                         context,
                         corAzul,
                         'Tempo',
-                        'assets/icons/raio.svg',
+                        'assets/icons/relogio.svg',
                         '0:15',
                       ),
                       square(

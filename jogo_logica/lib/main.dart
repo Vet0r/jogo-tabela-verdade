@@ -1,15 +1,26 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:jogo_logica/custom_theme.dart';
 import 'package:jogo_logica/dificuldades.dart';
 import 'package:jogo_logica/jogo.dart';
+import 'package:jogo_logica/provider/shared_prefs_provider.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => SnapshotSharedPreferences()),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -37,71 +48,111 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: backgroundColor,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        automaticallyImplyLeading: false,
-        title: Text(
-          'Jerry',
-          style: TextStyle(color: Colors.white),
-        ),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Column(
-              children: [
-                Image.asset(
-                  'assets/icons/livro.png',
-                  width: MediaQuery.of(context).size.width * 0.30,
-                  height: MediaQuery.of(context).size.height * 0.15,
+    return FutureBuilder(
+      future: SharedPreferences.getInstance(),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        } else {
+          final changeSp =
+              Provider.of<SnapshotSharedPreferences>(context, listen: true);
+          changeSp.changeSP(snapshot.data!);
+          return Scaffold(
+            backgroundColor: backgroundColor,
+            appBar: AppBar(
+                backgroundColor: backgroundColor,
+                automaticallyImplyLeading: false,
+                title: Text(
+                  'Jerry',
+                  style: TextStyle(color: Colors.white),
                 ),
-                Padding(padding: EdgeInsets.only(top: 20)),
-                Text(
-                  'Escolha a Dificuldade!',
-                  style: TextStyle(
-                      color: fontPrincipal,
-                      fontSize: 32,
-                      fontWeight: FontWeight.w600,
-                      fontFamily: 'Quicksand'),
-                ),
-                Text("Selecione um nível de dificuldade para\ncomeçar:",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600,
-                        fontFamily: 'Quicksand')),
-              ],
+                actions: [
+                  Row(
+                    children: [
+                      SvgPicture.asset('assets/icons/raio.svg'),
+                      Padding(padding: EdgeInsets.only(left: 8)),
+                      Text(
+                        Provider.of<SnapshotSharedPreferences>(context,
+                                        listen: false)
+                                    .sharedPrefs!
+                                    .getInt('pontos')
+                                    .toString() ==
+                                'null'
+                            ? '0'
+                            : Provider.of<SnapshotSharedPreferences>(context,
+                                    listen: false)
+                                .sharedPrefs!
+                                .getInt('pontos')
+                                .toString(),
+                        style: TextStyle(
+                          color: corAmarelo,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      )
+                    ],
+                  )
+                ]),
+            body: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Column(
+                    children: [
+                      Image.asset(
+                        'assets/icons/livro.png',
+                        width: MediaQuery.of(context).size.width * 0.30,
+                        height: MediaQuery.of(context).size.height * 0.15,
+                      ),
+                      Padding(padding: EdgeInsets.only(top: 20)),
+                      Text(
+                        'Escolha a Dificuldade!',
+                        style: TextStyle(
+                            color: fontPrincipal,
+                            fontSize: 32,
+                            fontWeight: FontWeight.w600,
+                            fontFamily: 'Quicksand'),
+                      ),
+                      Text("Selecione um nível de dificuldade para\ncomeçar:",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600,
+                              fontFamily: 'Quicksand')),
+                    ],
+                  ),
+                  containerDificuldade(
+                      'assets/icons/gema.png', 10, "Fácil", facil, 1),
+                  containerDificuldade(
+                      'assets/icons/cristal.png', 4, "Médio", medio, 3),
+                  containerDificuldade(
+                      'assets/icons/diamante.png', 10, "Difícil", dificil, 5),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      IconButton(
+                        onPressed: () {},
+                        icon: const Icon(
+                          Icons.leaderboard,
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: () {},
+                        icon: const Icon(
+                          Icons.settings,
+                        ),
+                      )
+                    ],
+                  )
+                ],
+              ),
             ),
-            containerDificuldade(
-                'assets/icons/gema.png', 10, "Fácil", facil, 1),
-            containerDificuldade(
-                'assets/icons/cristal.png', 4, "Médio", medio, 3),
-            containerDificuldade(
-                'assets/icons/diamante.png', 10, "Difícil", dificil, 5),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.leaderboard,
-                  ),
-                ),
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.settings,
-                  ),
-                )
-              ],
-            )
-          ],
-        ),
-      ),
+          );
+        }
+      },
     );
   }
 
