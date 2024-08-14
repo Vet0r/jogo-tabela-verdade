@@ -64,7 +64,7 @@ class PontuacaoScreen extends StatelessWidget {
                         corVerde,
                         'Precisão',
                         'assets/icons/alvo.svg',
-                        '${(pontuacao / respondidas) * 100}'),
+                        '${(((pontuacao / respondidas) * 100)).round()}'),
                   ],
                 ),
                 Padding(

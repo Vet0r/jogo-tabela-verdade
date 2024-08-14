@@ -278,8 +278,9 @@ class _JogarState extends State<Jogar> {
     } else {
       if (resp == widget.dificuldade[numero].resposta) {
         pontuacao++;
+        _start++;
       } else {
-        if (pontuacao-- < 0) {
+        if (pontuacao - 1 < 0) {
           null;
         } else {
           pontuacao--;

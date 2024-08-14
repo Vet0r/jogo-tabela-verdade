@@ -158,7 +158,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       width: MediaQuery.of(context).size.width * 0.66,
                       animation: true,
                       lineHeight: 25.0,
-                      animationDuration: 2500,
+                      animationDuration: 1000,
                       percent: double.parse(porcentagem.toString()) / 10,
                       center: Text(
                         "$porcentagem/10",
