@@ -12,8 +12,9 @@ import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'dificuldades.dart';
 
 class Jogar extends StatefulWidget {
-  Jogar({super.key, required this.dificuldade});
+  Jogar({super.key, required this.dificuldade, required this.modDif});
   List<Questao> dificuldade = [];
+  int modDif;
   @override
   State<Jogar> createState() => _JogarState();
 }
@@ -197,7 +198,7 @@ class _JogarState extends State<Jogar> {
                         MaterialStateProperty.all<Color>(CorDoBotao)),
                 onPressed: () {
                   if (_start > 0) {
-                    responder();
+                    responder(widget.modDif);
                   }
                 },
                 child: Center(
@@ -272,18 +273,19 @@ class _JogarState extends State<Jogar> {
     );
   }
 
-  responder() {
+  responder(int modDif) {
     if (resp == null) {
       null;
     } else {
       if (resp == widget.dificuldade[numero].resposta) {
-        pontuacao++;
-        _start++;
+        pontuacao += modDif;
+        _start += modDif;
       } else {
         if (pontuacao - 1 < 0) {
           null;
         } else {
-          pontuacao--;
+          pontuacao -= modDif;
+          _start -= modDif;
         }
       }
       respondidas++;
@@ -305,6 +307,7 @@ class _JogarState extends State<Jogar> {
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (context) => PontuacaoScreen(
+              modDif: widget.modDif,
               pontuacao: pontuacao,
               respondidas: respondidas,
             ),

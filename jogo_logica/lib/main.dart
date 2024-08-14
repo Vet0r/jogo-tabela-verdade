@@ -76,10 +76,12 @@ class _MyHomePageState extends State<MyHomePage> {
                         fontFamily: 'Quicksand')),
               ],
             ),
-            containerDificuldade('assets/icons/gema.png', 10, "Fácil", facil),
-            containerDificuldade('assets/icons/cristal.png', 4, "Médio", medio),
             containerDificuldade(
-                'assets/icons/diamante.png', 10, "Difícil", dificil),
+                'assets/icons/gema.png', 10, "Fácil", facil, 1),
+            containerDificuldade(
+                'assets/icons/cristal.png', 4, "Médio", medio, 3),
+            containerDificuldade(
+                'assets/icons/diamante.png', 10, "Difícil", dificil, 5),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -104,7 +106,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   containerDificuldade(String imagem, int porcentagem, String difuculdade,
-      List<Questao> questoes) {
+      List<Questao> questoes, int modDif) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 2),
       child: Container(
@@ -122,6 +124,7 @@ class _MyHomePageState extends State<MyHomePage> {
               MaterialPageRoute(
                 builder: (context) => Jogar(
                   dificuldade: questoes,
+                  modDif: modDif,
                 ),
               ),
             );

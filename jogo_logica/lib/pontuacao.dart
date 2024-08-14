@@ -9,8 +9,12 @@ import 'main.dart';
 
 class PontuacaoScreen extends StatelessWidget {
   PontuacaoScreen(
-      {super.key, required this.pontuacao, required this.respondidas});
+      {super.key,
+      required this.pontuacao,
+      required this.respondidas,
+      required this.modDif});
   int respondidas = 0;
+  int modDif = 1;
   int pontuacao = 0;
   TextEditingController controller = TextEditingController();
   List<String> phasesBottom = [
@@ -30,15 +34,15 @@ class PontuacaoScreen extends StatelessWidget {
   ];
   @override
   Widget build(BuildContext context) {
+    double media = (((pontuacao / modDif) / respondidas) * 100);
     int imagesAndPhase = 0;
-    if (pontuacao >= 10) {
+    if (media >= 100) {
       imagesAndPhase = 2;
-    } else if (pontuacao > 5 && pontuacao < 10) {
+    } else if (media > 50 && media < 100) {
       imagesAndPhase = 1;
     } else {
       imagesAndPhase = 0;
     }
-    double media = ((pontuacao / respondidas) * 100);
     return PopScope(
       canPop: false,
       child: Scaffold(
