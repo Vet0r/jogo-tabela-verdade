@@ -1,4 +1,3 @@
-
 import 'dart:async';
 import 'dart:math';
 
@@ -35,219 +34,255 @@ class _JogarState extends State<Jogar> {
   int numero = Random().nextInt(10);
   bool? resp;
   int pontuacao = 0;
-  int _start = 5;
+  int _start = 1;
   late Timer _timer;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: backgroundColor,
-     appBar:AppBar(
-  automaticallyImplyLeading: false, 
-  backgroundColor: Colors.transparent,
-  bottom: PreferredSize(
-    preferredSize: Size.fromHeight(20.0),
-    child: Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          IconButton(
-            icon: Icon(Icons.close, color: Colors.white, size: 24,),
-            onPressed: () {
-              
-              Navigator.of(context).pop();
-            },
-          ),
-          Expanded(
-            child: LinearPercentIndicator(
-              width: MediaQuery.of(context).size.width * 0.53,
-              animation: true,
-              lineHeight: 25.0,
-              animationDuration: 2500,
-              percent: 0.1,
-              center: Text(
-                "1/10",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w500,
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        backgroundColor: Colors.transparent,
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(20.0),
+          child: Padding(
+            padding:
+                const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                IconButton(
+                  icon: Icon(
+                    Icons.close,
+                    color: Colors.white,
+                    size: 24,
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
                 ),
-              ),
-              linearStrokeCap: LinearStrokeCap.roundAll,
-              progressColor: fontPrincipal,
-              backgroundColor: embaixoBorda,
-              barRadius: Radius.circular(14),
+                Expanded(
+                  child: LinearPercentIndicator(
+                    animation: true,
+                    lineHeight: 25.0,
+                    animationDuration: 2500,
+                    percent: 0.1,
+                    center: Text(
+                      "1/10",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    linearStrokeCap: LinearStrokeCap.roundAll,
+                    progressColor: fontPrincipal,
+                    backgroundColor: embaixoBorda,
+                    barRadius: Radius.circular(14),
+                  ),
+                ),
+                Row(
+                  children: [
+                    Image.asset('assets/icons/estrela.png'),
+                    SizedBox(width: 10),
+                    Text(
+                      "$pontuacao",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(width: 10),
+                Row(
+                  children: [
+                    Image.asset('assets/icons/relogio.png'),
+                    SizedBox(width: 10),
+                    Text(
+                      "$_start",
+                      style: TextStyle(
+                        color: CorDoRelogio,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
-          Row(
+        ),
+      ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Image.asset('assets/icons/estrela.png'),
-              SizedBox(width: 10),
+              Padding(padding: EdgeInsets.only(top: 20)),
               Text(
-                "$pontuacao",
+                'Verifique a proposição!',
                 style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                ),
+                    color: fontPrincipal,
+                    fontSize: 32,
+                    fontWeight: FontWeight.w600,
+                    fontFamily: 'Quicksand'),
               ),
             ],
           ),
-          SizedBox(width: 10),
-          Row(
+          Padding(padding: EdgeInsets.only(top: 20)),
+          Column(
             children: [
-              Image.asset('assets/icons/relogio.png'),
-              SizedBox(width: 10),
               Text(
-                "$_start",
+                widget.dificuldade[numero].pergunta,
                 style: TextStyle(
-                  color: CorDoRelogio,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                ),
+                    fontSize: 24,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w700),
+              ),
+              Padding(padding: EdgeInsets.only(top: 5)),
+              Image.asset(
+                numero.isEven
+                    ? 'assets/icons/homem.png'
+                    : 'assets/icons/bow.png',
+                width: MediaQuery.of(context).size.width * .4,
               ),
             ],
+          ),
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    botaoVerdadeOuFalso(
+                      'assets/icons/verdadeiro.png',
+                      true,
+                      Colors.green,
+                      "Verdadeiro",
+                      isButtonTrue1Active,
+                      1,
+                    ),
+                    SizedBox(width: 8),
+                    botaoVerdadeOuFalso(
+                      'assets/icons/falso.png',
+                      false,
+                      Colors.red,
+                      "Falso",
+                      isButtonFalse1Active,
+                      2,
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width * 1,
+              height: MediaQuery.of(context).size.height * 0.08,
+              child: ElevatedButton(
+                style: ButtonStyle(
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(6)),
+                        side: BorderSide(color: CorDoBotao, width: 2.0),
+                      ),
+                    ),
+                    backgroundColor:
+                        MaterialStateProperty.all<Color>(CorDoBotao)),
+                onPressed: () {
+                  if (_start > 0) {
+                    responder();
+                  }
+                },
+                child: Center(
+                  child: Text(
+                    "PRÓXIMO",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              ),
+            ),
           ),
         ],
       ),
-    ),
-  ),
-),
-      body: Column(
-        children: [
-          Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Padding(padding: EdgeInsets.only(top: 20)),
-                      Text('Verifique a proposição!',style: TextStyle(color: fontPrincipal, fontSize: 32,fontWeight: FontWeight.w600, fontFamily: 'Quicksand'),),
-                      Padding(padding: EdgeInsets.only(top: 5)),
-                      Text("Leia a sentença abaixo e selecione\nVerdadeira ou Falso.",textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.white,fontSize: 18,fontWeight: FontWeight.w600, fontFamily: 'Quicksand')),],),
-                  ),
-                  Padding(padding: EdgeInsets.only(top: 20)),
-                  Expanded(
-                    child: Column(
-                      children: [
-                        
-                      Container(),
-                                    Text(widget.dificuldade[numero].pergunta, style: TextStyle(fontSize:24, color: Colors.white, fontWeight: FontWeight.w700 ),),
-                      Container(),
-                      Padding(padding: EdgeInsets.only(top: 5)),
-                      Image.asset('assets/icons/homem.png'),],),
-                  ),
-          Expanded(
-  child: Padding(
-    padding: const EdgeInsets.all(8.0),
-    child: Column(
-      children: [
-        Row(
-          children: [
-            Expanded(
-              child: SizedBox(
-                height: 200, 
-                width: 200, 
-                child: ElevatedButton(
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent),
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.zero, 
-                        side: BorderSide(color: Colors.green, width: 1.0), // Borda verde
-                      ),
-                    ),
-                    minimumSize: MaterialStateProperty.all<Size>(Size(100, 100)), // Tamanho mínimo
-                  ),
-                  onPressed: () {
-                    setState(() {
-                      resp = true;
-                    });
-                  },
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset('assets/icons/verdadeiro.png'),
-                      Padding(padding: EdgeInsets.only(top: 35)),
-                      Text(
-                        "Verdadeiro",
-                        style: TextStyle(color: Colors.white,fontSize: 18),
-                      ),
-                    ],
-                  ),
-                ),
+    );
+  }
+
+  bool isButtonTrue1Active = false;
+  bool isButtonFalse1Active = false;
+
+  void toggleButtons(int buttonIndex) {
+    if (buttonIndex == 1) {
+      setState(() {
+        isButtonTrue1Active = true;
+        isButtonFalse1Active = false;
+      });
+    } else {
+      setState(() {
+        isButtonTrue1Active = false;
+        isButtonFalse1Active = true;
+      });
+    }
+  }
+
+  botaoVerdadeOuFalso(String image, bool tof, Color borderColor, String text,
+      bool active, int buttonIndex) {
+    return Expanded(
+      child: Container(
+        height: 200,
+        width: 200,
+        child: ElevatedButton(
+          style: ButtonStyle(
+            backgroundColor:
+                MaterialStateProperty.all<Color>(Colors.transparent),
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(6)),
+                side:
+                    BorderSide(color: active ? borderColor : borda, width: 2.0),
               ),
             ),
-            SizedBox(width: 8),
-           
-            Expanded(
-              child: SizedBox(
-                height: 200, 
-                width: 200, 
-                child: ElevatedButton(
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent),
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.zero, 
-                        side: BorderSide(color: Colors.red, width: 1.0), 
-                      ),
-                    ),
-                    minimumSize: MaterialStateProperty.all<Size>(Size(100, 100)), // Tamanho mínimo
-                  ),
-                  onPressed: () {
-                    setState(() {
-                      resp = false;
-                    });
-                  },
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset('assets/icons/falso.png'),
-                      Padding(padding: EdgeInsets.only(top: 35)),
-                      Text(
-                        "Falso",
-                        style: TextStyle(color: Colors.white, fontSize: 18), 
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ],
-    ),
-  ),
-),
-              SizedBox(
-                width: MediaQuery.of(context).size.width * 1,
-                height: MediaQuery.of(context).size.height * 0.08,
-                child: ElevatedButton(
-                  style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all<Color>(CorDoBotao)),
-                  onPressed: () {
-                    if (_start > 0) {
-                      responder();
-                    }
-                  },
-                  child: Center(
-                    child: Text("PRÓXIMO",style: TextStyle(color: Colors.white),),
-                  ),
-                ),
+            minimumSize: MaterialStateProperty.all<Size>(Size(100, 100)),
+          ),
+          onPressed: () {
+            setState(() {
+              resp = tof;
+              toggleButtons(buttonIndex);
+            });
+          },
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(image),
+              Padding(padding: EdgeInsets.only(top: 35)),
+              Text(
+                text,
+                style: TextStyle(color: Colors.white, fontSize: 18),
               ),
             ],
-          ),);
+          ),
+        ),
+      ),
+    );
   }
 
   responder() {
     if (resp == null) {
+      null;
     } else {
       if (resp == widget.dificuldade[numero].resposta) {
         pontuacao++;
       }
       setState(() {
         numero = Random().nextInt(10);
+        isButtonTrue1Active = false;
+        isButtonFalse1Active = false;
+        resp = null;
       });
     }
   }

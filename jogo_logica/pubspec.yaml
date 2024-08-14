@@ -75,6 +75,10 @@ flutter:
    - assets/icons/falso.png
    - assets/icons/verdadeiro.png
    - assets/icons/homem.png
+   - assets/chapeu.png
+   - assets/coroa.png
+   - assets/viking.png
+   - assets/icons/bow.png
 
   
     # An image asset can refer to one or more resolution-specific "variants", see
