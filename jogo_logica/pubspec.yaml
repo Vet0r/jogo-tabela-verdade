@@ -72,7 +72,9 @@ flutter:
    - assets/icons/gema.png
    - assets/icons/relogio.png
    - assets/icons/estrela.png
-
+   - assets/icons/falso.png
+   - assets/icons/verdadeiro.png
+   - assets/icons/homem.png
 
   
     # An image asset can refer to one or more resolution-specific "variants", see

@@ -5,6 +5,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter/widgets.dart';
 import 'package:jogo_logica/custom_theme.dart';
 import 'package:jogo_logica/pontuacao.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
@@ -44,7 +45,7 @@ class _JogarState extends State<Jogar> {
   automaticallyImplyLeading: false, 
   backgroundColor: Colors.transparent,
   bottom: PreferredSize(
-    preferredSize: Size.fromHeight(60.0),
+    preferredSize: Size.fromHeight(20.0),
     child: Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
       child: Row(
@@ -118,84 +119,109 @@ class _JogarState extends State<Jogar> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Padding(padding: EdgeInsets.only(top: 30)),
+                      Padding(padding: EdgeInsets.only(top: 20)),
                       Text('Verifique a proposição!',style: TextStyle(color: fontPrincipal, fontSize: 32,fontWeight: FontWeight.w600, fontFamily: 'Quicksand'),),
-                      Padding(padding: EdgeInsets.only(top: 10)),
+                      Padding(padding: EdgeInsets.only(top: 5)),
                       Text("Leia a sentença abaixo e selecione\nVerdadeira ou Falso.",textAlign: TextAlign.center,
                       style: TextStyle(color: Colors.white,fontSize: 18,fontWeight: FontWeight.w600, fontFamily: 'Quicksand')),],),
                   ),
-                  Padding(padding: EdgeInsets.only(top: 40)),
-          Expanded(
-  child: Column(
-    children: [
-      Row(
-        children: [
-          Expanded(
-            child: SizedBox(
-              height: 200, 
-              width: 200, 
-              child: ElevatedButton(
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.zero, // Bordas quadradas
-                      side: BorderSide(color: Colors.green, width: 1.0), // Borda verde
-                    ),
+                  Padding(padding: EdgeInsets.only(top: 20)),
+                  Expanded(
+                    child: Column(
+                      children: [
+                        
+                      Container(),
+                                    Text(widget.dificuldade[numero].pergunta, style: TextStyle(fontSize:24, color: Colors.white, fontWeight: FontWeight.w700 ),),
+                      Container(),
+                      Padding(padding: EdgeInsets.only(top: 5)),
+                      Image.asset('assets/icons/homem.png'),],),
                   ),
-                  minimumSize: MaterialStateProperty.all<Size>(Size(100, 100)), // Tamanho mínimo
-                ),
-                onPressed: () {
-                  setState(() {
-                    resp = true;
-                  });
-                },
-                child: Center(
-                  child: Text(
-                    "Verdadeiro",
-                    style: TextStyle(color: Colors.white), // Texto verde
+          Expanded(
+  child: Padding(
+    padding: const EdgeInsets.all(8.0),
+    child: Column(
+      children: [
+        Row(
+          children: [
+            Expanded(
+              child: SizedBox(
+                height: 200, 
+                width: 200, 
+                child: ElevatedButton(
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.zero, 
+                        side: BorderSide(color: Colors.green, width: 1.0), // Borda verde
+                      ),
+                    ),
+                    minimumSize: MaterialStateProperty.all<Size>(Size(100, 100)), // Tamanho mínimo
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      resp = true;
+                    });
+                  },
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset('assets/icons/verdadeiro.png'),
+                      Padding(padding: EdgeInsets.only(top: 35)),
+                      Text(
+                        "Verdadeiro",
+                        style: TextStyle(color: Colors.white,fontSize: 18),
+                      ),
+                    ],
                   ),
                 ),
               ),
             ),
-          ),
-          SizedBox(width: 8),
-         
-          Expanded(
-            child: SizedBox(
-              height: 200, 
-              width: 200, 
-              child: ElevatedButton(
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.zero, 
-                      side: BorderSide(color: Colors.red, width: 1.0), 
+            SizedBox(width: 8),
+           
+            Expanded(
+              child: SizedBox(
+                height: 200, 
+                width: 200, 
+                child: ElevatedButton(
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.zero, 
+                        side: BorderSide(color: Colors.red, width: 1.0), 
+                      ),
                     ),
+                    minimumSize: MaterialStateProperty.all<Size>(Size(100, 100)), // Tamanho mínimo
                   ),
-                  minimumSize: MaterialStateProperty.all<Size>(Size(100, 100)), // Tamanho mínimo
-                ),
-                onPressed: () {
-                  setState(() {
-                    resp = false;
-                  });
-                },
-                child: Center(
-                  child: Text(
-                    "Falso",
-                    style: TextStyle(color: Colors.white), 
+                  onPressed: () {
+                    setState(() {
+                      resp = false;
+                    });
+                  },
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset('assets/icons/falso.png'),
+                      Padding(padding: EdgeInsets.only(top: 35)),
+                      Text(
+                        "Falso",
+                        style: TextStyle(color: Colors.white, fontSize: 18), 
+                      ),
+                    ],
                   ),
                 ),
               ),
             ),
-          ),
-        ],
-      ),
-    ],
+          ],
+        ),
+      ],
+    ),
   ),
 ),
-              Container(
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 1,
+                height: MediaQuery.of(context).size.height * 0.08,
                 child: ElevatedButton(
                   style: ButtonStyle(
                       backgroundColor:
