@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -125,23 +127,6 @@ class _MyHomePageState extends State<MyHomePage> {
                       "Difícil",
                       dificil,
                       5),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      IconButton(
-                        onPressed: () {},
-                        icon: const Icon(
-                          Icons.leaderboard,
-                        ),
-                      ),
-                      IconButton(
-                        onPressed: () {},
-                        icon: const Icon(
-                          Icons.settings,
-                        ),
-                      )
-                    ],
-                  )
                 ],
               ),
             ),
@@ -211,9 +196,9 @@ class _MyHomePageState extends State<MyHomePage> {
                       animation: true,
                       lineHeight: 25.0,
                       animationDuration: 1000,
-                      percent: double.parse(porcentagem.toString()) / 10,
+                      percent: (min(double.parse(porcentagem.toString()), 10) / 10),
                       center: Text(
-                        "$porcentagem/10",
+                        "${min(porcentagem, 10)}/10",
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 18,

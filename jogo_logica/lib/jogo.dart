@@ -62,24 +62,7 @@ class _JogarState extends State<Jogar> {
                   },
                 ),
                 Expanded(
-                  child: LinearPercentIndicator(
-                    animation: true,
-                    lineHeight: 25.0,
-                    animationDuration: 2500,
-                    percent: 0.1,
-                    center: Text(
-                      "1/10",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    linearStrokeCap: LinearStrokeCap.roundAll,
-                    progressColor: fontPrincipal,
-                    backgroundColor: embaixoBorda,
-                    barRadius: Radius.circular(14),
-                  ),
+                  child: Container()
                 ),
                 Row(
                   children: [
