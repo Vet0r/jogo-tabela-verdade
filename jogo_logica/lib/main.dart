@@ -196,7 +196,8 @@ class _MyHomePageState extends State<MyHomePage> {
                       animation: true,
                       lineHeight: 25.0,
                       animationDuration: 1000,
-                      percent: (min(double.parse(porcentagem.toString()), 10) / 10),
+                      percent:
+                          (min(double.parse(porcentagem.toString()), 10) / 10),
                       center: Text(
                         "${min(porcentagem, 10)}/10",
                         style: TextStyle(

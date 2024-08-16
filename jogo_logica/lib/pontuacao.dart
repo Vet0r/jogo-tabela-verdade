@@ -54,7 +54,7 @@ class PontuacaoScreen extends StatelessWidget {
     switch (modDif) {
       case 1:
         int pontos = sharedPrefs!.getInt('nFac') ?? 0;
-        if (pontos <= 10) {
+        if (pontos >= 10) {
           sharedPrefs.setInt('nFac', pontos += 1);
         } else {
           null;
@@ -62,7 +62,7 @@ class PontuacaoScreen extends StatelessWidget {
         break;
       case 3:
         int pontos = sharedPrefs!.getInt('nMed') ?? 0;
-        if (pontos <= 10) {
+        if (pontos >= 10) {
           sharedPrefs.setInt('nMed', pontos += 1);
         } else {
           null;
@@ -70,9 +70,8 @@ class PontuacaoScreen extends StatelessWidget {
         break;
       case 5:
         int pontos = sharedPrefs!.getInt('nDif') ?? 0;
-        if (pontos <= 10) {
+        if (pontos >= 10) {
           sharedPrefs.setInt('nDif', pontos += 1);
-          ;
         } else {
           null;
         }
